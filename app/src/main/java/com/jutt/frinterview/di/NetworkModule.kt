@@ -1,12 +1,15 @@
 package com.jutt.frinterview.di
 
+import android.content.Context
 import com.jutt.frinterview.network.ApiClient
 import com.jutt.frinterview.network.ApiService
 import com.jutt.frinterview.repository.ItemRepository
 import com.jutt.frinterview.repository.ItemRepositoryImpl
+import com.jutt.frinterview.util.NetworkUtil
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -24,6 +27,20 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     /**
+     * Provides a singleton instance of [NetworkUtil].
+     *
+     * @param context The application context required for network operations
+     * @return The NetworkUtil instance for checking network connectivity
+     */
+    @Provides
+    @Singleton
+    fun provideNetworkUtil(
+        @ApplicationContext context: Context
+    ): NetworkUtil {
+        return NetworkUtil(context)
+    }
+
+    /**
      * Provides a singleton instance of [ApiService].
      *
      * @return The API service instance created by [ApiClient]
@@ -31,18 +48,22 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideApiService(): ApiService {
-        return ApiClient.createApiService()
+        return ApiClient.create()
     }
 
     /**
      * Provides a singleton instance of [ItemRepository].
      *
      * @param apiService The API service instance to be used by the repository
+     * @param networkUtil The NetworkUtil instance for checking connectivity
      * @return The repository implementation instance
      */
     @Provides
     @Singleton
-    fun provideItemRepository(apiService: ApiService): ItemRepository {
-        return ItemRepositoryImpl(apiService)
+    fun provideItemRepository(
+        apiService: ApiService,
+        networkUtil: NetworkUtil
+    ): ItemRepository {
+        return ItemRepositoryImpl(apiService, networkUtil)
     }
 }

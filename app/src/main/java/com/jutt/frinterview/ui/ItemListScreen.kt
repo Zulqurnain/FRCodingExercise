@@ -1,6 +1,7 @@
 package com.jutt.frinterview.ui
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -14,6 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.jutt.frinterview.model.Item
 import com.jutt.frinterview.viewmodel.ItemListViewModel
@@ -22,8 +24,8 @@ import com.jutt.frinterview.viewmodel.ItemListViewModel
  * Main screen composable for displaying the list of items.
  *
  * This composable is responsible for rendering the item list UI, including loading states,
- * error messages, and the actual list of items. It observes the ViewModel's state and
- * updates the UI accordingly.
+ * error messages, and the actual list of items grouped by listId. It observes the ViewModel's
+ * state and updates the UI accordingly.
  *
  * @param viewModel The ViewModel that manages the screen's state and business logic
  * @param modifier Modifier for customizing the layout
@@ -32,7 +34,7 @@ import com.jutt.frinterview.viewmodel.ItemListViewModel
  * @since 1.0.0
  */
 @Composable
-fun itemListScreen(
+fun ItemListScreen(
     viewModel: ItemListViewModel,
     modifier: Modifier = Modifier,
 ) {
@@ -56,12 +58,12 @@ fun itemListScreen(
                         color = MaterialTheme.colorScheme.error,
                     )
                 }
-                uiState.items.isEmpty() -> {
+                uiState.groupedItems.isEmpty() -> {
                     Text(text = "No items available")
                 }
                 else -> {
-                    itemList(
-                        items = uiState.items,
+                    GroupedItemList(
+                        groupedItems = uiState.groupedItems,
                         modifier = Modifier.fillMaxSize(),
                     )
                 }
@@ -71,30 +73,41 @@ fun itemListScreen(
 }
 
 /**
- * Composable for rendering the list of items.
+ * Composable for rendering the grouped list of items.
  *
- * This composable uses a LazyColumn to efficiently display a scrollable list of items.
- * Each item is displayed with its name and description.
+ * This composable uses a LazyColumn to efficiently display a scrollable list of items,
+ * grouped by listId. Each group has a header showing its listId, followed by the items
+ * in that group.
  *
- * @param items The list of items to display
+ * @param groupedItems Map of listId to list of items in that group
  * @param modifier Modifier for customizing the layout
  *
  * @author Zulqurnain Haider (zulqurnainjj@gmail.com)
  * @since 1.0.0
  */
 @Composable
-private fun itemList(
-    items: List<Item>,
+private fun GroupedItemList(
+    groupedItems: Map<Int, List<Item>>,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
         modifier = modifier.padding(16.dp),
     ) {
-        items(items) { item ->
-            Text(
-                text = "${item.name} - ${item.description}",
-                modifier = Modifier.padding(vertical = 4.dp),
-            )
+        groupedItems.entries.forEach { (listId, items) ->
+            item {
+                Text(
+                    text = "List ID: $listId",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(vertical = 8.dp),
+                )
+            }
+            items(items) { item ->
+                Text(
+                    text = item.name ?: "",
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp),
+                )
+            }
         }
     }
 }

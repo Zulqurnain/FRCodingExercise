@@ -18,14 +18,14 @@ class ItemTest {
     }
 
     @Test
-    fun `isValid should return false for null name`() {
-        val item = Item(1, 1, null)
+    fun `isValid should return false for blank name`() {
+        val item = Item(1, 1, "   ")
         assertFalse(item.isValid())
     }
 
     @Test
-    fun `isValid should return false for blank name`() {
-        val item = Item(1, 1, "   ")
+    fun `isValid should return false for null name`() {
+        val item = Item(1, 1, null)
         assertFalse(item.isValid())
     }
 }
