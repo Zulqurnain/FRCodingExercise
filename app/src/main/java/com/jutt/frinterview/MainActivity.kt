@@ -3,45 +3,46 @@ package com.jutt.frinterview
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.jutt.frinterview.ui.theme.FetchRewardsTheme
+import com.jutt.frinterview.network.ApiClient
+import com.jutt.frinterview.repository.ItemRepositoryImpl
+import com.jutt.frinterview.ui.itemListScreen
+import com.jutt.frinterview.ui.theme.frInterviewTheme
+import com.jutt.frinterview.viewmodel.ItemListViewModel
 
+/**
+ * Main activity for the FR Interview application.
+ *
+ * This activity serves as the entry point of the application and sets up the
+ * root composable. It initializes the necessary dependencies (API client,
+ * repository, and ViewModel) and configures the app's theme.
+ *
+ * The activity uses Jetpack Compose for its UI, setting up a full-screen
+ * surface that contains the main item list screen.
+ *
+ * @author Zulqurnain Haider (zulqurnainjj@gmail.com)
+ * @since 1.0.0
+ */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
+        val api = ApiClient.createApiService()
+        val repository = ItemRepositoryImpl(api)
+        val viewModel = ItemListViewModel(repository)
+
         setContent {
-            FetchRewardsTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+            frInterviewTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background,
+                ) {
+                    itemListScreen(viewModel = viewModel)
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    FetchRewardsTheme {
-        Greeting("Android")
     }
 }
