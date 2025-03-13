@@ -16,12 +16,17 @@ import com.jutt.frinterview.model.Item
  */
 interface ItemRepository {
     /**
-     * Retrieves all items from the data source.
+     * Retrieves all valid items from the data source.
      *
-     * @return List of [Item]s sorted by their IDs
+     * The items are:
+     * 1. Filtered to remove those with null or blank names
+     * 2. Grouped by listId
+     * 3. Sorted by name within each group
+     *
+     * @return Map of listId to sorted list of [Item]s
      * @throws Exception if the operation fails
      */
-    suspend fun getItems(): List<Item>
+    suspend fun getItems(): Map<Int, List<Item>>
 
     /**
      * Adds a new item to the data source.
