@@ -18,6 +18,19 @@ import androidx.compose.ui.unit.dp
 import com.jutt.frinterview.model.Item
 import com.jutt.frinterview.viewmodel.ItemListViewModel
 
+/**
+ * Main screen composable for displaying the list of items.
+ *
+ * This composable is responsible for rendering the item list UI, including loading states,
+ * error messages, and the actual list of items. It observes the ViewModel's state and
+ * updates the UI accordingly.
+ *
+ * @param viewModel The ViewModel that manages the screen's state and business logic
+ * @param modifier Modifier for customizing the layout
+ *
+ * @author Zulqurnain Haider (zulqurnainjj@gmail.com)
+ * @since 1.0.0
+ */
 @Composable
 fun itemListScreen(
     viewModel: ItemListViewModel,
@@ -57,6 +70,18 @@ fun itemListScreen(
     }
 }
 
+/**
+ * Composable for rendering the list of items.
+ *
+ * This composable uses a LazyColumn to efficiently display a scrollable list of items.
+ * Each item is displayed with its name and description.
+ *
+ * @param items The list of items to display
+ * @param modifier Modifier for customizing the layout
+ *
+ * @author Zulqurnain Haider (zulqurnainjj@gmail.com)
+ * @since 1.0.0
+ */
 @Composable
 private fun itemList(
     items: List<Item>,
