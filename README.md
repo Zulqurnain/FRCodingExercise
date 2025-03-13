@@ -2,6 +2,9 @@
 
 A modern Android application built with Jetpack Compose that demonstrates clean architecture, MVVM pattern, and best practices in Android development.
 
+## Demo
+[![App Demo](recording.mp4)](recording.mp4)
+
 ## Project Overview
 
 This project is a demonstration of building a scalable and maintainable Android application that manages a list of items. It showcases:
@@ -104,13 +107,31 @@ app/
 
 ### Build Configuration
 * Kotlin DSL for Gradle
-* Latest Android Gradle Plugin
-* Kotlin 1.9.0
-* Compose Compiler 1.5.0
-* Hilt 2.48
+* Android Gradle Plugin 8.2.2
+* Kotlin 1.9.22
+* Compose Compiler 1.5.8
+* Hilt 2.50
 * Retrofit 2.9.0
 * Coroutines 1.7.3
-* Material3 1.1.0
+* Material3 1.2.0
+* AndroidX Core KTX 1.12.0
+* AndroidX Lifecycle 2.7.0
+* AndroidX Navigation 2.7.7
+* AndroidX Room 2.6.1
+* AndroidX Test 1.5.0
+* JUnit 4.13.2
+* MockK 1.13.9
+* Detekt 1.23.5
+* KtLint 0.50.0
+
+### Native Dependencies
+* Android SDK 34 (Android 14)
+* Minimum SDK 24 (Android 7.0)
+* Target SDK 34 (Android 14)
+* NDK 26.1.10909125
+* CMake 3.22.1
+* Gradle 8.2
+* JDK 17
 
 ### Testing Framework
 * JUnit 4
