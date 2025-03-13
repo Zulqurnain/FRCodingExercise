@@ -182,10 +182,54 @@ git clone https://github.com/Zulqurnain/FRCodingExercise.git
 ## Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Pull Request Guidelines
+* Follow conventional commit messages
+* Include tests for new features
+* Update documentation as needed
+* Ensure all tests pass
+* Follow the existing code style
+
+## Build and Run
+
+### Prerequisites
+* Android Studio Hedgehog | 2023.1.1 or newer
+* JDK 17
+* Android SDK 34
+* Gradle 8.2
+
+### Build Variants
+* Debug: Development build with debugging tools
+* Release: Production build with optimizations enabled
+* DebugTest: For running tests in debug mode
+
+### Performance Tips
+* Enable Gradle build cache
+* Use parallel execution
+* Enable configuration cache
+* Use the latest Android Studio version
+
+## Troubleshooting
+
+### Common Issues
+1. Gradle Sync Failures
+   - Clean project and rebuild
+   - Invalidate caches and restart
+   - Update Gradle wrapper
+
+2. Build Errors
+   - Check SDK versions
+   - Verify dependency versions
+   - Update Android Studio
+
+3. Runtime Issues
+   - Check logcat for errors
+   - Verify permissions
+   - Test on different devices
 
 ## License
 
@@ -196,10 +240,42 @@ This project is proprietary and confidential. All rights reserved.
 **Zulqurnain Haider**
 - Email: zulqurnainjj@gmail.com
 - GitHub: [@Zulqurnain](https://github.com/Zulqurnain)
+- LinkedIn: [Zulqurnain Haider](https://www.linkedin.com/in/zulqurnain-haider/)
 
 ## Acknowledgments
 
-* Android Jetpack team
-* Kotlin team
-* Material Design team
+* Android Jetpack team for providing excellent libraries
+* Kotlin team for the powerful language
+* Material Design team for the beautiful UI components
 * All contributors and reviewers
+* Fetch Rewards team for the opportunity
+
+## Support
+
+For support, please:
+1. Check the documentation
+2. Review existing issues
+3. Create a new issue if needed
+4. Contact the maintainer
+
+## Roadmap
+
+### Planned Features
+* [ ] Offline support
+* [ ] Data persistence
+* [ ] Analytics integration
+* [ ] Performance monitoring
+* [ ] Accessibility improvements
+
+### Known Issues
+* See GitHub Issues for current known issues
+* Report new issues with detailed steps to reproduce
+
+## Version History
+
+* 1.0.0
+  * Initial release
+  * Basic item list functionality
+  * Image caching
+  * Unit tests
+  * UI tests
